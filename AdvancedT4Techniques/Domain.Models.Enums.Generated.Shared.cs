@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿
+using System.Runtime.Serialization;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Models.Enums.Generated.Shared

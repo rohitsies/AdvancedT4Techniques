@@ -60,14 +60,24 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HtmlGenerator.html">
+    <Content Include="HtmlGenerator2.html">
+      <DependentUpon>HtmlGenerator2.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HtmlGenerator.tt</DependentUpon>
     </Content>
-    <Content Include="HtmlGenerator.tt">
+    <Content Include="HtmlGenerator2.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HtmlGenerator.html</LastGenOutput>
+      <LastGenOutput>HtmlGenerator2.html</LastGenOutput>
+    </Content>
+    <Content Include="HtmlGenerator1.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HtmlGenerator1.tt</DependentUpon>
+    </Content>
+    <Content Include="HtmlGenerator1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HtmlGenerator1.html</LastGenOutput>
+      <AutoTransformOnBuild>true</AutoTransformOnBuild>
     </Content>
     <Content Include="Domain.Models.Enums.Generated.Shared.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -75,4 +85,59 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- START AdvancedT4Techniques -->
+  <!-- START Configuration: Define some methods to execute before and after the transform to show some messages. -->
+  <PropertyGroup>
+    <BeforeTransform>CustomPreTransform</BeforeTransform>
+    <AfterTransform>CustomPostTransform</AfterTransform>
+  </PropertyGroup>
+  <Target Name="CustomPreTransform">
+    <Message Text="In CustomPreTransform..." Importance="High" />
+    <!-- This message will be shown in Output window right before the transformation -->
+  </Target>
+  <Target Name="CustomPostTransform">
+    <Message Text="In CustomPostTransform...@(GeneratedFiles)" Importance="High" />
+    <!-- This message will be shown in Output window right before the transformation. It also shows the Generated Files. -->
+  </Target>
+  <!-- Optionally make the import portable across VS versions -->
+  <PropertyGroup>
+    <BeforeTransform>CustomPreTransform</BeforeTransform>
+    <AfterTransform>CustomPostTransform</AfterTransform>
+  </PropertyGroup>
+  <!-- END Configuration -->
+  <!-- START Auto Execute T4 template -->
+  <!-- Optionally make the import portable across VS versions -->
+  <PropertyGroup>
+    <!-- Get the Visual Studio version: -->
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
+    <!-- Keep the next element all on one line: -->
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\TextTemplating\Microsoft.TextTemplating.targets" />
+  <!-- Below settings will control if we want to auto transform on build -->
+  <PropertyGroup>
+    <TransformOnBuild>true</TransformOnBuild>
+    <!-- Run the Transform task at the start of every build. simply switch it off to disable auto transform on build. -->
+  </PropertyGroup>
+  <PropertyGroup>
+    <OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
+    <!-- Overwrite files that are read-only, for example because they are not checked out -->
+  </PropertyGroup>
+  <PropertyGroup>
+    <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
+    <!-- Transform every template every time -->
+  </PropertyGroup>
+  <!-- Below settings are to select the files which needs to be transformed automatically-->
+  <Target Name="CreateT4ItemLists">
+    <Message Importance="low" Text="Creating T4 items lists for project $(ProjectName) ($(ProjectPath))..." />
+    <!-- Work out which of the files in the @(CreateT4ItemListsInputs) group are T4 files. -->
+    <ItemGroup>
+      <!-- Add only those files that have the AutoTransformOnBuild marked as true, This way you could select specific T4 templates to be auto transform on build while excluding others. -->
+      <T4TransformInputs Include="@(CreateT4ItemListsInputs)" Condition=" %(CreateT4ItemListsInputs.AutoTransformOnBuild) == true " />
+      <!-- Add any files that are in the gruop T4Transform -->
+      <T4TransformInputs Include="@(T4Transform)" />
+    </ItemGroup>
+  </Target>
+  <!-- End Auto Execute T4 template -->
+  <!-- END AdvancedT4Techniques -->
 </Project>

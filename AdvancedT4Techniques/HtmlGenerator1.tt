@@ -1,0 +1,8 @@
+﻿<#@ output extension=".html" #>
+
+<html>
+<body>
+HTML Generator 1
+ The date and time now is: <#= DateTime.Now #>
+</body>
+</html>

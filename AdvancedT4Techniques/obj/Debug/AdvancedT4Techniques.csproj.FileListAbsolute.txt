@@ -1,7 +1,6 @@
 C:\Rohit\Per\Work\Github\AdvancedT4Techniques\AdvancedT4Techniques\AdvancedT4Techniques\bin\Debug\AdvancedT4Techniques.exe.config
 C:\Rohit\Per\Work\Github\AdvancedT4Techniques\AdvancedT4Techniques\AdvancedT4Techniques\bin\Debug\AdvancedT4Techniques.exe
 C:\Rohit\Per\Work\Github\AdvancedT4Techniques\AdvancedT4Techniques\AdvancedT4Techniques\bin\Debug\AdvancedT4Techniques.pdb
-C:\Rohit\Per\Work\Github\AdvancedT4Techniques\AdvancedT4Techniques\AdvancedT4Techniques\obj\Debug\AdvancedT4Techniques.csprojAssemblyReference.cache
 C:\Rohit\Per\Work\Github\AdvancedT4Techniques\AdvancedT4Techniques\AdvancedT4Techniques\obj\Debug\AdvancedT4Techniques.csproj.CoreCompileInputs.cache
 C:\Rohit\Per\Work\Github\AdvancedT4Techniques\AdvancedT4Techniques\AdvancedT4Techniques\obj\Debug\AdvancedT4Techniques.exe
 C:\Rohit\Per\Work\Github\AdvancedT4Techniques\AdvancedT4Techniques\AdvancedT4Techniques\obj\Debug\AdvancedT4Techniques.pdb
