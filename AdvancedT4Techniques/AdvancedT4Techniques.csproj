@@ -99,11 +99,6 @@
     <Message Text="In CustomPostTransform...@(GeneratedFiles)" Importance="High" />
     <!-- This message will be shown in Output window right before the transformation. It also shows the Generated Files. -->
   </Target>
-  <!-- Optionally make the import portable across VS versions -->
-  <PropertyGroup>
-    <BeforeTransform>CustomPreTransform</BeforeTransform>
-    <AfterTransform>CustomPostTransform</AfterTransform>
-  </PropertyGroup>
   <!-- END Configuration -->
   <!-- START Auto Execute T4 template -->
   <!-- Optionally make the import portable across VS versions -->
